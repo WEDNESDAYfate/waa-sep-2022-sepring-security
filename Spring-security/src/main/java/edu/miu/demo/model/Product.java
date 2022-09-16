@@ -4,20 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Data
 @Entity
 public class Product {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Long id;
     private String name;
-    private double price;
-    private int rating;
+    private Double price;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private Instant createdAt;
+    private Long createdBy;
+    private Instant updatedAt;
+    private Long updatedBy;
 }

@@ -13,19 +13,18 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Long id;
+    private String firstname;
+    private String lastname;
+    @Column(unique = true)
+    private String username;
+    @Column(unique = true)
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 
-//  Create UserV1 and AddressV1 mapping with Join Column
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Role> roles;
 
-//  Create UserV1 and AddressV1 mapping with Join Column
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Review> review;
 }
